@@ -27,6 +27,7 @@ var (
 		"chore	[update grunt tasks etc; no production code change]",
 		"version	[description of version upgrade]",
 	}
+	tapdTypes = []string{"story", "bug"}
 )
 
 func fillMessage(msg *Message) {
@@ -63,7 +64,7 @@ func fillMessage(msg *Message) {
 
 	mlFoot := bb.MultilinePrompt{
 		BasicPrompt: bb.BasicPrompt{
-			Label:     "Type in the foot",
+			Label:     "Type in the tapd id",
 			Formatter: linterFoot,
 			Validate: func(s string) error {
 				if s == "" {

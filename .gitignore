@@ -1,2 +1,3 @@
-cmd/gitcomm
 builds
+.idea
+/gitcomm

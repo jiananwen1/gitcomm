@@ -14,8 +14,8 @@ Usage:
 Download and install it:
 
 ```sh
-$ go get -u -d github.com/karantin2020/gitcomm/cmd
-$ go install -o gitcomm github.com/karantin2020/gitcomm/cmd
+$ go get -u -d github.com/karantin2020/gitcomm/gitcomm
+$ go install -o gitcomm github.com/karantin2020/gitcomm/gitcomm
 ```
 
 Or install precompiled release binary.  
