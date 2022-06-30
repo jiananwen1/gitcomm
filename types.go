@@ -12,13 +12,15 @@ type Message struct {
 	// Subject message field
 	Subject string
 	// Body message field
-	Body string
-	// Foot message field
-	Foot string
+	//Body string
+	// tapd id field
+	TapdId int
+	// TapdType tapd type: story/bug
+	TapdType string
 }
 
 func (m Message) String() string {
 	buf := bytes.NewBuffer(nil)
-	fmt.Fprintf(buf, "%s: %s\n\n%s\n\n%s", m.Type, m.Subject, m.Body, m.Foot)
+	fmt.Fprintf(buf, "%s: %s\n\n--%s=%d", m.Type, m.Subject, m.TapdType, m.TapdId)
 	return buf.String()
 }

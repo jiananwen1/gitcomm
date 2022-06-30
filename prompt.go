@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 	"strings"
 	"unicode"
 
@@ -12,10 +13,10 @@ import (
 
 var (
 	msg = Message{
-		Type:    "feat",
-		Subject: "",
-		Body:    "",
-		Foot:    "",
+		Type:     "feat",
+		Subject:  "",
+		TapdType: "story",
+		TapdId:   0,
 	}
 	types = []string{
 		"feat	[new feature]",
@@ -43,41 +44,36 @@ func fillMessage(msg *Message) {
 	}
 	msg.Subject, err = p.Run()
 	checkInterrupt(err)
-	mlBody := bb.MultilinePrompt{
-		BasicPrompt: bb.BasicPrompt{
-			Label: "Type in the body",
-			Default: `# If applied, this commit will...
-# [Add/Fix/Remove/Update/Refactor/Document] [issue #id] [summary]
-`,
-			Formatter: linterBody,
-			Validate:  validateBody,
-		},
-	}
-	msg.Body, err = mlBody.Run()
-	checkInterrupt(err)
+	//	mlBody := bb.MultilinePrompt{
+	//		BasicPrompt: bb.BasicPrompt{
+	//			Label: "Type in the body",
+	//			Default: `# If applied, this commit will...
+	//# [Add/Fix/Remove/Update/Refactor/Document] [issue #id] [summary]
+	//`,
+	//			Formatter: linterBody,
+	//			Validate:  validateBody,
+	//		},
+	//	}
+	//	msg.Body, err = mlBody.Run()
+	//	checkInterrupt(err)
 	// # Why is it necessary? (Bug fix, feature, improvements?)
 	// -
 	// # How does the change address the issue?
 	// -
 	// # What side effects does this change have?
 	// -
-
-	mlFoot := bb.MultilinePrompt{
+	msg.TapdType, err = bb.PromptAfterSelect("Choose a type(<scope>)", tapdTypes)
+	checkInterrupt(err)
+	p = bb.Prompt{
 		BasicPrompt: bb.BasicPrompt{
 			Label:     "Type in the tapd id",
-			Formatter: linterFoot,
-			Validate: func(s string) error {
-				if s == "" {
-					return bb.NewValidationError("Foot must not be empty string")
-				}
-				if len(s) > 50 {
-					return bb.NewValidationError("Foot cannot be longer than 50 characters")
-				}
-				return nil
-			},
+			Formatter: linterTapdId,
+			Validate:  validateTpadId,
 		},
 	}
-	msg.Foot, err = mlFoot.Run()
+	tapdId, err := p.Run()
+	checkInterrupt(err)
+	msg.TapdId, err = strconv.Atoi(tapdId)
 	checkInterrupt(err)
 }
 
@@ -154,6 +150,14 @@ func linterSubject(s string) string {
 	flds := strings.Fields(s)
 	flds[0] = strings.Title(flds[0])
 	return strings.Join(flds, " ")
+}
+func linterTapdId(s string) string {
+	if len(s) == 0 {
+		return s
+	}
+	// Remove all leading and trailing white spaces
+	s = strings.TrimSpace(s)
+	return s
 }
 
 func linterBody(s string) string {
@@ -275,6 +279,17 @@ func validateSubject(s string) error {
 	}
 	if len(s) > 72 {
 		return bb.NewValidationError("Subject cannot be longer than 72 characters")
+	}
+	return nil
+}
+
+func validateTpadId(s string) error {
+	if s == "" {
+		return bb.NewValidationError("tpad id must not be empty")
+	}
+	_, err := strconv.Atoi(s)
+	if err != nil {
+		return bb.NewValidationError("Tapd id must be a number")
 	}
 	return nil
 }
