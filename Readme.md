@@ -1,4 +1,4 @@
-[![GoDoc](https://godoc.org/github.com/karantin2020/gitcomm?status.svg)](github.com/karantin2020/gitcomm) [![Go Report Card](https://goreportcard.com/badge/github.com/karantin2020/gitcomm)](https://goreportcard.com/report/github.com/karantin2020/gitcomm) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GoDoc](https://godoc.org/github.com/studyzy/gitcomm?status.svg)](github.com/studyzy/gitcomm) [![Go Report Card](https://goreportcard.com/badge/github.com/studyzy/gitcomm)](https://goreportcard.com/report/github.com/studyzy/gitcomm) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Git commit message formatter
 
@@ -9,13 +9,12 @@ The name 'gitcomm' is short 'git commit message'.
 
 Usage:
 
-![demo](https://github.com/karantin2020/gitcomm/raw/master/docs/screen.gif)
+![demo](https://github.com/studyzy/gitcomm/raw/master/docs/screen.gif)
 
 Download and install it:
 
 ```sh
-$ go get -u -d github.com/karantin2020/gitcomm/gitcomm
-$ go install -o gitcomm github.com/karantin2020/gitcomm/gitcomm
+$ go install github.com/studyzy/gitcomm/cmd/gitcomm@latest
 ```
 
 Or install precompiled release binary.  
@@ -25,7 +24,7 @@ Usage: gitcomm [-v] [-Ast] | [-u]
 
 Automate git commit messaging
 
-Source https://github.com/karantin2020/gitcomm
+Source https://github.com/studyzy/gitcomm
                   
 Options:          
   -V, --version   Show the version and exit
