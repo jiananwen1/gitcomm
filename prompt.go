@@ -8,7 +8,7 @@ import (
 	"strings"
 	"unicode"
 
-	bb "github.com/karantin2020/promptui"
+	bb "github.com/studyzy/gitcomm/promptui"
 )
 
 var (

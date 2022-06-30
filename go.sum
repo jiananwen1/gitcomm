@@ -7,8 +7,6 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/jawher/mow.cli v1.2.0 h1:e6ViPPy+82A/NFF/cfbq3Lr6q4JHKT9tyHwTCcUQgQw=
 github.com/jawher/mow.cli v1.2.0/go.mod h1:y+pcA3jBAdo/GIZx/0rFjw/K2bVEODP9rfZOfaiq8Ko=
-github.com/karantin2020/promptui v0.1.0 h1:DpJHmh3MfZfzEeU/3MKAB8QGPE7klMFmTt2mklOTSU4=
-github.com/karantin2020/promptui v0.1.0/go.mod h1:wbH9AiVYQ4miLEmn+ZDFSIvmmCmpGP45TMM+ynW08nI=
 github.com/karantin2020/readline v0.0.0-20190318024627-af343dd535e9 h1:WtHMKvwS/IVOOD/faMb+mwxOc5gyvJiWPlpopBOL2o4=
 github.com/karantin2020/readline v0.0.0-20190318024627-af343dd535e9/go.mod h1:FwLAmQzSTAAkuhYa87GQW8o72FG5Hw+pAwJm8I2yk38=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=

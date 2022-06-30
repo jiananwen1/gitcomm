@@ -7,7 +7,7 @@ import (
 	"regexp"
 	"strconv"
 
-	bb "github.com/karantin2020/promptui"
+	bb "github.com/studyzy/gitcomm/promptui"
 )
 
 // copypast from https://github.com/calmh/git-autotag
