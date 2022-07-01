@@ -18,17 +18,28 @@ var (
 		TapdType: "story",
 		TapdId:   0,
 	}
-	types = []string{
-		"feat	[new feature]",
-		"fix		[bug fix]",
-		"docs	[changes to documentation]",
-		"style	[format, missing semi colons, etc; no code change]",
-		"refactor	[refactor production code]",
-		"test	[add missing tests, refactor tests; no production code change]",
-		"chore	[update grunt tasks etc; no production code change]",
-		"other	[user define any content message]",
-	}
+	//types = []string{
+	//	"feat	[new feature]",
+	//	"fix		[bug fix]",
+	//	"docs	[changes to documentation]",
+	//	"style	[format, missing semi colons, etc; no code change]",
+	//	"refactor	[refactor production code]",
+	//	"test	[add missing tests, refactor tests; no production code change]",
+	//	"chore	[update grunt tasks etc; no production code change]",
+	//	"other	[user define any content message]",
+	//}
 	tapdTypes = []string{"story", "bug"}
+
+	types = []string{
+		"feat	[新功能（feature）]",
+		"fix		[修补bug]",
+		"docs	[文档（documentation）]",
+		"style	[格式（不影响代码运行的变动）]",
+		"refactor	[重构（即不是新增功能，也不是修改bug的代码变动）]",
+		"test	[增加测试]",
+		"chore	[构建过程或辅助工具的变动]",
+		"other	[自定义消息]",
+	}
 )
 
 func fillMessage(msg *Message) {

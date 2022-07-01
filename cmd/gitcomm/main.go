@@ -25,7 +25,7 @@ func main() {
 		verbose = app.BoolOpt("v verbose", false, "Switch log output")
 		show    = app.BoolOpt("s show", false, "Show last commit or not. "+
 			"Evals `git show -s` in the end of execution")
-		tag  = app.BoolOpt("t tag", false, "Create an annonated tag for the next logical version")
+		tag  = app.BoolOpt("t tag", false, "Create an annotated tag for the next logical version")
 		undo = app.BoolOpt("u undo", false, "Revert last commit")
 	)
 
