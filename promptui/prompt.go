@@ -164,6 +164,9 @@ func (bp *BasicPrompt) Init() error {
 	bp.c.UniqueEditLine = true
 
 	bp.state = bp.IconInitial
+	if bp.Label[len(bp.Label)-1:] == ":" || bp.Label[len(bp.Label)-1:] == "=" {
+		bp.punctuation = ""
+	}
 	bp.prompt = bp.LabelInitial(bp.Label) + bp.punctuation + bp.suggestedAnswer + " "
 
 	bp.c.Prompt = bp.Indent + bp.state + " " + bp.PromptInitial(bp.prompt)
@@ -375,23 +378,26 @@ func AskMasked(label, startString string) (string, error) {
 // Answers may contain option description wrapped in `[]`
 func PromptAfterSelect(label string, answers []string) (string, error) {
 	s := Select{
-		Label:   label,
-		Items:   answers,
-		Default: 0,
+		Label:     label,
+		Items:     answers,
+		Default:   0,
+		IsVimMode: false,
 	}
 	_, rs, err := s.Run()
 	if err != nil {
 		return rs, err
 	}
+
 	if i := strings.Index(rs, "["); i > -1 {
 		rs = strings.TrimSpace(rs[:i])
 	}
 	fmt.Print(upLine(1) + clearLine)
-	p := Prompt{
-		BasicPrompt: BasicPrompt{
-			Label:   label,
-			Default: rs,
-		},
-	}
-	return p.Run()
+	//p := Prompt{
+	//	BasicPrompt: BasicPrompt{
+	//		Label:   label,
+	//		Default: rs,
+	//	},
+	//}
+	//return p.Run()
+	return rs, nil
 }

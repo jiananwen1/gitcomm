@@ -21,6 +21,10 @@ type Message struct {
 
 func (m Message) String() string {
 	buf := bytes.NewBuffer(nil)
-	fmt.Fprintf(buf, "%s: %s\n\n--%s=%d", m.Type, m.Subject, m.TapdType, m.TapdId)
+	if m.Type == "other" {
+		fmt.Fprintf(buf, "%s", m.Subject)
+	} else {
+		fmt.Fprintf(buf, "%s: %s\n\n--%s=%d", m.Type, m.Subject, m.TapdType, m.TapdId)
+	}
 	return buf.String()
 }

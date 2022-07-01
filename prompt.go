@@ -26,24 +26,29 @@ var (
 		"refactor	[refactor production code]",
 		"test	[add missing tests, refactor tests; no production code change]",
 		"chore	[update grunt tasks etc; no production code change]",
-		"version	[description of version upgrade]",
+		"other	[user define any content message]",
 	}
 	tapdTypes = []string{"story", "bug"}
 )
 
 func fillMessage(msg *Message) {
 	var err error
-	msg.Type, err = bb.PromptAfterSelect("Choose a type(<scope>)", types)
+	msg.Type, err = bb.PromptAfterSelect("Choose a commit type", types)
 	checkInterrupt(err)
+
 	p := bb.Prompt{
 		BasicPrompt: bb.BasicPrompt{
-			Label:     "Type in the subject",
+			Label:     msg.Type + ":",
 			Formatter: linterSubject,
 			Validate:  validateSubject,
 		},
 	}
 	msg.Subject, err = p.Run()
 	checkInterrupt(err)
+
+	if msg.Type == "other" {
+		return
+	}
 	//	mlBody := bb.MultilinePrompt{
 	//		BasicPrompt: bb.BasicPrompt{
 	//			Label: "Type in the body",
@@ -62,11 +67,12 @@ func fillMessage(msg *Message) {
 	// -
 	// # What side effects does this change have?
 	// -
-	msg.TapdType, err = bb.PromptAfterSelect("Choose a type(<scope>)", tapdTypes)
+	msg.TapdType, err = bb.PromptAfterSelect("Choose a TAPD type", tapdTypes)
 	checkInterrupt(err)
 	p = bb.Prompt{
 		BasicPrompt: bb.BasicPrompt{
-			Label:     "Type in the tapd id",
+			Label: "--" + msg.TapdType + "=",
+
 			Formatter: linterTapdId,
 			Validate:  validateTpadId,
 		},
@@ -81,34 +87,34 @@ func fillMessage(msg *Message) {
 func Prompt() string {
 	fillMessage(&msg)
 	gitMsg := msg.String() + "\n"
-	Info("\nCommit message is:\n%s", gitMsg)
-	for {
-		cp := bb.ConfirmPrompt{
-			BasicPrompt: bb.BasicPrompt{
-				Label:   "Is everything OK? Continue",
-				Default: "N",
-				NoIcons: true,
-			},
-			ConfirmOpt: "e",
-		}
-		c, err := cp.Run()
-		checkConfirmStatus(c, err)
-		if c == "Y" {
-			break
-		}
-		if c == "E" {
-			numlines := len(strings.Split(gitMsg, "\n"))
-			for ; numlines > -1; numlines-- {
-				fmt.Print(bb.ClearUpLine())
-			}
-			gitMsg, err = bb.Editor("", gitMsg)
-			checkInterrupt(err)
-			Info(gitMsg)
-			// checkConfirmStatus(bb.Confirm("Is everything OK? Continue", "N", true))
-			// return gitMsg
-			continue
-		}
-	}
+	//Info("\nCommit message is:\n%s", gitMsg)
+	//for {
+	//	cp := bb.ConfirmPrompt{
+	//		BasicPrompt: bb.BasicPrompt{
+	//			Label:   "Is everything OK? Continue",
+	//			Default: "N",
+	//			NoIcons: true,
+	//		},
+	//		ConfirmOpt: "e",
+	//	}
+	//	c, err := cp.Run()
+	//	checkConfirmStatus(c, err)
+	//	if c == "Y" {
+	//		break
+	//	}
+	//	if c == "E" {
+	//		numlines := len(strings.Split(gitMsg, "\n"))
+	//		for ; numlines > -1; numlines-- {
+	//			fmt.Print(bb.ClearUpLine())
+	//		}
+	//		gitMsg, err = bb.Editor("", gitMsg)
+	//		checkInterrupt(err)
+	//		Info(gitMsg)
+	//		// checkConfirmStatus(bb.Confirm("Is everything OK? Continue", "N", true))
+	//		// return gitMsg
+	//		continue
+	//	}
+	//}
 	return gitMsg
 }
 

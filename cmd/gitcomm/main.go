@@ -58,7 +58,6 @@ func main() {
 			gitcomm.AutoTag(level)
 		}
 	}
-
 	// Invoke the app passing in os.Args
 	app.Run(os.Args)
 }

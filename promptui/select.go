@@ -46,7 +46,7 @@ func (s *Select) innerRun(starting int, top rune) (int, string, error) {
 	c.UniqueEditLine = true
 
 	start := 0
-	end := 4
+	end := len(s.Items) - 1
 
 	if len(s.Items) <= end {
 		end = len(s.Items) - 1
@@ -65,7 +65,6 @@ func (s *Select) innerRun(starting int, top rune) (int, string, error) {
 	counter := 0
 
 	rl.Operation.ExitVimInsertMode() // Never use insert mode for selects
-
 	c.SetListener(func(line []rune, pos int, key rune) ([]rune, int, bool) {
 		if rl.Operation.IsEnableVimMode() {
 			rl.Operation.ExitVimInsertMode()
@@ -78,7 +77,11 @@ func (s *Select) innerRun(starting int, top rune) (int, string, error) {
 				key = readline.CharPrev
 			}
 		}
-
+		//TODO: 没搞定
+		//if key >= '1' && key <= '9' { //数字选择
+		//	selected, _ = strconv.Atoi(string(key))
+		//	return []rune{readline.CharEnter}, 0, true
+		//}
 		switch key {
 		case readline.CharEnter:
 			return nil, 0, true
