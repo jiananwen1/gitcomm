@@ -10,7 +10,7 @@ func GitExec(addAll, show bool, msg string) {
 	if addAll {
 		gitColorCmd("add", "-A")
 	}
-	gitColorCmd("add", "-u")
+	//gitColorCmd("add", "-u")
 	gitColorCmd("commit", "-m", msg)
 	if show {
 		gitColorCmd("show", "-s")
