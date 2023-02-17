@@ -14,7 +14,7 @@ Usage:
 Download and install it:
 
 ```sh
-$ go install github.com/studyzy/gitcomm/cmd/gitcomm@latest
+$ go install github.com/jiananwen1/gitcomm/cmd/gitcomm@add_latest_commit_number
 ```
 
 Or install precompiled release binary.  
