@@ -6,7 +6,7 @@ import (
 	"strings"
 	"unicode"
 
-	bb "github.com/studyzy/gitcomm/promptui"
+	bb "github.com/jiananwen1/gitcomm/promptui"
 )
 
 func main() {

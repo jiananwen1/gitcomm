@@ -1,4 +1,4 @@
-module github.com/studyzy/gitcomm
+module github.com/jiananwen1/gitcomm
 
 go 1.18
 

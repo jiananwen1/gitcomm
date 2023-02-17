@@ -7,8 +7,8 @@ import (
 	"os"
 
 	cli "github.com/jawher/mow.cli"
-	"github.com/studyzy/gitcomm"
-	"github.com/studyzy/gitcomm/version"
+	"github.com/jiananwen1/gitcomm"
+	"github.com/jiananwen1/gitcomm/version"
 )
 
 func main() {
