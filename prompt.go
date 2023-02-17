@@ -1,6 +1,7 @@
 package gitcomm
 
 import (
+	"errors"
 	"fmt"
 	"log"
 	"os"
@@ -29,6 +30,8 @@ var (
 	//	"other	[user define any content message]",
 	//}
 	tapdTypes = []string{"story", "bug"}
+
+	chooseLastTapdId = []string{"true", "false"}
 
 	types = []string{
 		"feat	[新功能（feature）]",
@@ -80,6 +83,24 @@ func fillMessage(msg *Message) {
 	// -
 	msg.TapdType, err = bb.PromptAfterSelect("Choose a TAPD type", tapdTypes)
 	checkInterrupt(err)
+
+	usingLastStoryId, err := bb.PromptAfterSelect("Using last story id?", chooseLastTapdId)
+	checkInterrupt(err)
+
+	b, err := strconv.ParseBool(usingLastStoryId)
+	checkInterrupt(err)
+	if b {
+		lastCommit, err := gitWithOutput("log", "-1")
+		checkInterrupt(err)
+		tapdId := getStoryIdFromLastCommitLog(lastCommit)
+		if len(tapdId) == 0 {
+			checkInterrupt(errors.New("invalid story id"))
+		}
+		msg.TapdId, err = strconv.Atoi(tapdId)
+		checkInterrupt(err)
+		return
+	}
+
 	p = bb.Prompt{
 		BasicPrompt: bb.BasicPrompt{
 			Label: "--" + msg.TapdType + "=",
@@ -98,6 +119,8 @@ func fillMessage(msg *Message) {
 func Prompt() string {
 	fillMessage(&msg)
 	gitMsg := msg.String() + "\n"
+
+	// todo: save git message, tapd id into somewhere
 	//Info("\nCommit message is:\n%s", gitMsg)
 	//for {
 	//	cp := bb.ConfirmPrompt{

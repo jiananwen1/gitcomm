@@ -37,3 +37,11 @@ func gitColorCmd(cmd ...string) {
 	log.Printf("git %s\n", strings.Join(cmd, " "))
 	git(args...)
 }
+
+func gitWithOutput(args ...string) (string, error) {
+	out, err := exec.Command("git", args...).Output()
+	if err != nil {
+		return "", err
+	}
+	return string(out), nil
+}
